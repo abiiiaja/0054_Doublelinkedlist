@@ -57,13 +57,11 @@ public:
         // insert in between node
         // Step 8: Locate position for insertion
         Node *current = START;
-        while (current->next != NULL && current->next->noMhs < nim)
-        {
+        while (current->next != NULL && current->next->noMhs < nim){
             current = current->next;
         }
 
-        if (current->next != NULL && nim == current->next->noMhs)
-        {
+        if (current->next != NULL && nim == current->next->noMhs){
             cout << "\nDuplicate roll numbers not allowed" << endl;
             return;
         }
@@ -82,8 +80,7 @@ public:
 
 
     void hapus(){
-        if (START == NULL)
-        {
+        if (START == NULL){
             cout << "\nList is empty" << endl;
             return;
         }
@@ -98,19 +95,30 @@ public:
         while (current != NULL && current->noMhs != rollNo)
             current = current->next;
 
-        if (current == NULL)
-        {
+        if (current == NULL){
             cout << "Record not found" << endl;
             return;
         }
 
         // Step 2: If node is at the beginning
-        if (current == START)
-        {
+        if (current == START){
             START = current->next; // Step 2a: START = START.next
             if (START != NULL)
                 START->prev = NULL; // Step 2b: START.prev = NULL
         }
+
+        else{
+            // Step 3: Link previous node to next of current
+            current->prev->next = current->next;
+
+            // Step 4: If current is not the last node
+            if (current->next != NULL)
+                current->next->prev = current->prev;
+        }
+
+        // Step 5: Delete the node
+        delete current;
+        cout << "Record with roll number " << rollNo << " deleted" << endl;
 
     }
 
