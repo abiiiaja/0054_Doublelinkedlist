@@ -55,7 +55,7 @@ public:
             return;
         }
 
-        
+
         // insert in between node
         // Step 8: Locate position for insertion
         Node *current = START;
@@ -74,5 +74,12 @@ public:
         newNode->next = current->next; // Step 9a: newNode.next = current.next
         newNode->prev = current;       // Step 9b: newNode.prev = current
 
+
+        // insert Last node
+        if (current->next != NULL)
+            current->next->prev = newNode; // Step 9c: current.next.prev = newNode
+
+        current->next = newNode; // Step 9d: current.next = newNode
     }
+
 };
